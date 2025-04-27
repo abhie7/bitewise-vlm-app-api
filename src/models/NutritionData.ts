@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { INutritionData } from '../types';
+import { INutritionData } from '../types/index';
 
 const NutritionDataSchema: Schema = new Schema(
   {

@@ -60,18 +60,25 @@ class UserService {
    * Create a new user
    */
   async createUser(userData: Partial<IUser>): Promise<IUser> {
-    // Generate UUID if not provided
     if (!userData.uuid) {
       userData.uuid = uuidv4();
     }
 
-    // Hash password before creating user
+    if (!userData.email) {
+      throw new Error('Email is required to create a user');
+    }
+
+    logger.debug(`Register Payload: ${userData.userName}`);
+
+    if (userData.avatar) {
+      logger.debug(`Creating user with avatar (ID: ${userData.avatar.id})`);
+    }
+
     if (userData.password) {
       const salt = await bcrypt.genSalt(10);
       userData.password = await bcrypt.hash(userData.password, salt);
     }
 
-    // Ensure email is normalized
     if (userData.email) {
       userData.email = userData.email.toLowerCase().trim();
     }

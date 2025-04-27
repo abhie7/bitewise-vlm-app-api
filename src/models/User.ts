@@ -1,6 +1,25 @@
 import mongoose, { Schema } from 'mongoose'
 import { IUser } from '../types'
 
+// Create schema for avatar data
+const AvatarDataSchema = new Schema({
+  bgColor: String,
+  shapeColor: String,
+  faceColor: String,
+  transform: String,
+  shapeType: String,
+  rx: Schema.Types.Mixed, // Can be string or number
+  faceType: String,
+  eyeType: String,
+  facePosition: String
+}, { _id: false });
+
+// Create schema for avatar
+const AvatarSchema = new Schema({
+  id: Number,
+  avatarData: AvatarDataSchema
+}, { _id: false });
+
 const UserSchema: Schema = new Schema(
   {
     uuid: {
@@ -30,6 +49,10 @@ const UserSchema: Schema = new Schema(
       type: String,
       trim: true,
     },
+    avatar: {
+      type: AvatarSchema,
+      default: null
+    }
   },
   {
     timestamps: true,

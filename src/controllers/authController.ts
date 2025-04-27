@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { config } from '../config/config'
-import { ApiResponse, AuthRequest, UserPayload } from '../types'
+import { ApiResponse, AuthRequest, UserPayload, IAvatar } from '../types'
 import { logger } from '../utils/logger'
 import { userService } from '../services/UserService'
 import { v4 as uuidv4 } from 'uuid'
@@ -16,6 +16,7 @@ class AuthController {
       uuid: user.uuid,
       email: user.email,
       userName: user.userName || 'defaultUserName',
+      avatar: user.avatar
     }
 
     // @ts-ignore
@@ -33,7 +34,7 @@ class AuthController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { email, password, userName } = req.body
+      const { email, password, userName, avatar } = req.body
       const normalizedEmail = email.toLowerCase().trim()
 
       logger.info(`Registration attempt for email: ${normalizedEmail}`)
@@ -53,17 +54,22 @@ class AuthController {
       // Generate UUID for new user
       const uuid = uuidv4()
 
-      const user = await userService.createUser({
+      // Create user with avatar if provided
+      const userData = {
         email: normalizedEmail,
         uuid,
         userName,
         password,
-      })
+        avatar: avatar as IAvatar || null
+      }
+
+      const user = await userService.createUser(userData)
 
       const token = this.generateToken({
         uuid: user.uuid,
         email: user.email,
         userName: user.userName || 'defaultUserName',
+        avatar: user.avatar
       })
 
       logger.info(
@@ -77,6 +83,7 @@ class AuthController {
           uuid: user.uuid,
           email: user.email,
           userName: user.userName,
+          avatar: user.avatar,
           token,
         },
       }
