@@ -179,6 +179,7 @@ class AuthController {
           uuid: user.uuid,
           email: user.email,
           userName: user.userName,
+          avatar: user.avatar,
           token,
         },
       }
