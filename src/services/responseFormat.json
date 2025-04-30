@@ -1,0 +1,442 @@
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "nutrition_info",
+    "description": "Nutrition information for a food item",
+    "type": "object",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "confidence_score": {
+              "type": "number",
+              "description": "Confidence score of the prediction"
+            },
+            "error_status": {
+              "type": "boolean",
+              "description": "Error status of the prediction"
+            }
+          },
+          "required": ["confidence_score", "error_status"]
+        },
+        "product_details": {
+          "type": "object",
+          "properties": {
+            "serving_size": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of the serving size"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of the serving size"
+                },
+                "type": {
+                  "type": ["string", "null"],
+                  "description": "Type of the serving size"
+                }
+              },
+              "required": ["amount", "unit"]
+            }
+          },
+          "required": ["serving_size"]
+        },
+        "total_calories": {
+          "type": "integer",
+          "description": "Total calories in the food item"
+        },
+        "nutrients": {
+          "type": "object",
+          "description": "Nutritional information of the food item",
+          "properties": {
+            "total_fat": {
+              "type": "object",
+              "description": "Details about total fat content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of total fat"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of total fat"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of total fat"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of total fat"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of total fat"
+                },
+                "sub_nutrients": {
+                  "type": "object",
+                  "description": "Sub-nutrients under total fat",
+                  "properties": {
+                    "saturated_fat": {
+                      "type": "object",
+                      "description": "Details about saturated fat content",
+                      "properties": {
+                        "amount": {
+                          "type": ["number", "null"],
+                          "description": "Amount of saturated fat"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "Unit of saturated fat"
+                        },
+                        "daily_value_percentage": {
+                          "type": ["number", "null"],
+                          "description": "Daily value percentage of saturated fat"
+                        },
+                        "group": {
+                          "type": "string",
+                          "description": "Group classification of saturated fat"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Category classification of saturated fat"
+                        }
+                      }
+                    },
+                    "trans_fat": {
+                      "type": "object",
+                      "description": "Details about trans fat content",
+                      "properties": {
+                        "amount": {
+                          "type": ["number", "null"],
+                          "description": "Amount of trans fat"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "Unit of trans fat"
+                        },
+                        "daily_value_percentage": {
+                          "type": ["number", "null"],
+                          "description": "Daily value percentage of trans fat"
+                        },
+                        "group": {
+                          "type": "string",
+                          "description": "Group classification of trans fat"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Category classification of trans fat"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "cholesterol": {
+              "type": "object",
+              "description": "Details about cholesterol content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of cholesterol"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of cholesterol"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of cholesterol"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of cholesterol"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of cholesterol"
+                }
+              }
+            },
+            "carbohydrates": {
+              "type": "object",
+              "description": "Details about carbohydrate content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of carbohydrates"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of carbohydrates"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of carbohydrates"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of carbohydrates"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of carbohydrates"
+                },
+                "sub_nutrients": {
+                  "type": "object",
+                  "description": "Sub-nutrients under carbohydrates",
+                  "properties": {
+                    "dietary_fiber": {
+                      "type": "object",
+                      "description": "Details about dietary fiber content",
+                      "properties": {
+                        "amount": {
+                          "type": ["number", "null"],
+                          "description": "Amount of dietary fiber"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "Unit of dietary fiber"
+                        },
+                        "daily_value_percentage": {
+                          "type": ["number", "null"],
+                          "description": "Daily value percentage of dietary fiber"
+                        },
+                        "group": {
+                          "type": "string",
+                          "description": "Group classification of dietary fiber"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Category classification of dietary fiber"
+                        }
+                      }
+                    },
+                    "total_sugar": {
+                      "type": "object",
+                      "description": "Details about total sugar content",
+                      "properties": {
+                        "amount": {
+                          "type": ["number", "null"],
+                          "description": "Amount of total sugar"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "Unit of total sugar"
+                        },
+                        "daily_value_percentage": {
+                          "type": ["number", "null"],
+                          "description": "Daily value percentage of total sugar"
+                        },
+                        "group": {
+                          "type": "string",
+                          "description": "Group classification of total sugar"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Category classification of total sugar"
+                        }
+                      }
+                    },
+                    "added_sugar": {
+                      "type": "object",
+                      "description": "Details about added sugar content",
+                      "properties": {
+                        "amount": {
+                          "type": ["number", "null"],
+                          "description": "Amount of added sugar"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "Unit of added sugar"
+                        },
+                        "daily_value_percentage": {
+                          "type": ["number", "null"],
+                          "description": "Daily value percentage of added sugar"
+                        },
+                        "group": {
+                          "type": "string",
+                          "description": "Group classification of added sugar"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Category classification of added sugar"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "protein": {
+              "type": "object",
+              "description": "Details about protein content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of protein"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of protein"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of protein"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of protein"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of protein"
+                }
+              }
+            },
+            "sodium": {
+              "type": "object",
+              "description": "Details about sodium content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of sodium"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of sodium"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of sodium"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of sodium"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of sodium"
+                }
+              }
+            },
+            "calcium": {
+              "type": "object",
+              "description": "Details about calcium content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of calcium"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of calcium"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of calcium"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of calcium"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of calcium"
+                }
+              }
+            },
+            "iron": {
+              "type": "object",
+              "description": "Details about iron content",
+              "properties": {
+                "amount": {
+                  "type": ["number", "null"],
+                  "description": "Amount of iron"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of iron"
+                },
+                "daily_value_percentage": {
+                  "type": ["number", "null"],
+                  "description": "Daily value percentage of iron"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Group classification of iron"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category classification of iron"
+                }
+              }
+            },
+            "vitamins": {
+              "type": "array",
+              "description": "Details about vitamin content",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "vitamin_type": {
+                    "type": "string",
+                    "description": "Type of vitamin"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Amount of vitamin"
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Unit of vitamin"
+                  },
+                  "daily_value_percentage": {
+                    "type": ["number", "null"],
+                    "description": "Daily value percentage of vitamin"
+                  },
+                  "group": {
+                    "type": "string",
+                    "description": "Group classification of vitamin"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Category classification of vitamin"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ingredients": {
+          "type": ["array", "null"],
+          "description": "List of ingredients in the food item",
+          "items": {
+            "type": "string",
+            "description": "An ingredient"
+          }
+        },
+        "allergens": {
+          "type": ["array", "null"],
+          "description": "List of allergens in the food item",
+          "items": {
+            "type": "string",
+            "description": "An allergen"
+          }
+        }
+      },
+      "required": [
+        "metadata",
+        "product_details",
+        "total_calories",
+        "nutrients"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

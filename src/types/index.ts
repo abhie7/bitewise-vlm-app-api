@@ -25,6 +25,10 @@ export interface AuthRequest extends Request {
 export interface INutritionData extends Document {
   userId: string;
   imageUrl: string;
+  imageId?: string;
+  fileName?: string;
+  fileType?: string;
+  fileSize?: number;
   foodName: string;
   calories: number;
   carbs: number;
@@ -33,6 +37,8 @@ export interface INutritionData extends Document {
   sugar: number;
   fiber: number;
   additionalInfo?: string;
+  rawAnalysisData?: any;
+  collectionName?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -52,4 +58,18 @@ export interface SocketEvents {
   nutritionAnalysisProgress: string;
   nutritionAnalysisComplete: string;
   nutritionAnalysisError: string;
+}
+
+export interface NutritionResult {
+  id?: string;
+  imageId?: string;
+  foodName: string;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  sugar: number;
+  fiber: number;
+  additionalInfo: string;
+  rawData?: any;
 }

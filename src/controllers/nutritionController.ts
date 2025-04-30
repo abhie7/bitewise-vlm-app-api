@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import NutritionData from '../models/NutritionData';
+import DefaultNutritionData, { getNutritionDataModel } from '../models/NutritionData';
 import { ApiResponse, AuthRequest } from '../types';
 import { logger } from '../utils/logger';
 
@@ -12,15 +12,18 @@ export const createNutritionData = async (
   try {
     const { imageUrl, foodName, calories, carbs, protein, fat, sugar, fiber, additionalInfo } = req.body;
 
-    if (!req.user?.id) {
+    if (!req.user?.uuid) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
       });
     }
 
+    // Get user-specific model
+    const NutritionData = getNutritionDataModel(req.user.uuid);
+
     const nutritionData = await NutritionData.create({
-      userId: req.user.id,
+      userId: req.user.uuid,
       imageUrl,
       foodName,
       calories,
@@ -29,7 +32,7 @@ export const createNutritionData = async (
       fat,
       sugar: sugar || 0,
       fiber: fiber || 0,
-      additionalInfo,
+      additionalInfo
     });
 
     const response: ApiResponse<any> = {
@@ -52,7 +55,7 @@ export const getNutritionDataByUser = async (
   next: NextFunction
 ) => {
   try {
-    if (!req.user?.id) {
+    if (!req.user?.uuid) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
@@ -64,8 +67,11 @@ export const getNutritionDataByUser = async (
     const limitNumber = parseInt(limit as string, 10);
     const skip = (pageNumber - 1) * limitNumber;
 
-    // Build query based on search parameter
-    const query: any = { userId: req.user.id };
+    // Get user-specific model
+    const NutritionData = getNutritionDataModel(req.user.uuid);
+
+    // Build query
+    const query: any = { userId: req.user.uuid };
 
     // If search term is provided, use text search
     if (search) {
@@ -111,16 +117,19 @@ export const getNutritionDataById = async (
   try {
     const { id } = req.params;
 
-    if (!req.user?.id) {
+    if (!req.user?.uuid) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
       });
     }
 
+    // Get user-specific model
+    const NutritionData = getNutritionDataModel(req.user.uuid);
+
     const nutritionData = await NutritionData.findOne({
       _id: id,
-      userId: req.user.id,
+      userId: req.user.uuid,
     });
 
     if (!nutritionData) {
@@ -153,15 +162,18 @@ export const updateNutritionData = async (
     const { id } = req.params;
     const { foodName, calories, carbs, protein, fat, sugar, fiber, additionalInfo } = req.body;
 
-    if (!req.user?.id) {
+    if (!req.user?.uuid) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
       });
     }
 
+    // Get user-specific model
+    const NutritionData = getNutritionDataModel(req.user.uuid);
+
     const nutritionData = await NutritionData.findOneAndUpdate(
-      { _id: id, userId: req.user.id },
+      { _id: id, userId: req.user.uuid },
       {
         foodName,
         calories,
@@ -204,16 +216,19 @@ export const deleteNutritionData = async (
   try {
     const { id } = req.params;
 
-    if (!req.user?.id) {
+    if (!req.user?.uuid) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
       });
     }
 
+    // Get user-specific model
+    const NutritionData = getNutritionDataModel(req.user.uuid);
+
     const nutritionData = await NutritionData.findOneAndDelete({
       _id: id,
-      userId: req.user.id,
+      userId: req.user.uuid,
     });
 
     if (!nutritionData) {
