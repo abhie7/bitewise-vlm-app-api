@@ -12,24 +12,10 @@ import { errorHandler } from './middlewares/errorHandler'
 import { setupSocketIO } from './sockets/socketManager'
 import { logger } from './utils/logger'
 import routes from './routes'
-const swaggerUI = require('swagger-ui-express')
-const swaggerSpec = require('./config/swagger')
 
 const app = express()
 const server = http.createServer(app)
 
-app.use(
-  '/docs',
-  swaggerUI.serve,
-  swaggerUI.setup(swaggerSpec, {
-    explorer: true,
-    customCss: '.swagger-ui .topbar { display: none }',
-    swaggerOptions: {
-      docExpansion: 'none',
-      persistAuthorization: true,
-    },
-  })
-)
 
 // Setup Socket.IO
 const io = new SocketIOServer(server, {
