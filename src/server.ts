@@ -19,6 +19,7 @@ const server = http.createServer(app)
 
 // Setup Socket.IO
 const io = new SocketIOServer(server, {
+  path: '/ws',
   cors: {
     origin: config.allowedOrigins,
     credentials: true,

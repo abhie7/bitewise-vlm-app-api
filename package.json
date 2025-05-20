@@ -22,6 +22,7 @@
   "homepage": "https://github.com/abhie7/bitewise-vlm-app-api#readme",
   "description": "Backend API for the Bitewise VLM Nutrition Info App",
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "axios": "^1.9.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
